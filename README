@@ -1,0 +1,23 @@
+#### To extract the relevant numbers from correlators:
+# the the correlator file need to be named like
+"corr.m${mu}_b${beta}_L${L}T${T}_k${kappa}_${phase(low/high)}"
+# To choose which correlator file to extract write their names in the file templist
+(e.g:# ls $datadir > table_corr ) then
+./get_corr
+# input: table_corr, corr.*
+# output: table_run.dat, corr.*.dat
+
+#### To extract the basic quantities: m_pi, f_pi, g_pi, omegas, Z's ...
+# edit file get_Q to select the ranges.
+# from matlab
+get_Q
+# input: table_run.dat, table_Q.saved, corr.*.dat
+# output: table_Q.temp
+
+#### To extract the LEC's
+# edit file get_LEC to choose the fitting setup
+# from matlab
+get_LEC('b')
+
+#input: table_Q.? 
+#output: plots and LEC on matlab

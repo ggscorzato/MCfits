@@ -1,0 +1,22 @@
+#!/bin/tcsh -f
+
+# select dir here:
+set datadir = ${HOME}/Work/LQCD/Correlators/DBW2Data/mu0
+set here = `pwd`
+
+#set colist = ( PP AP  AA0 VVs VP AVs VAs AAs VpsP VpsA VpsV0 dAP)
+set colist = ( AA0 AP PP VVs VV0  AAs SS dAP dPA )
+set smlist = ( ss ls )
+
+foreach fil ( `cat ${datadir}/table_corr`)
+cd ${datadir}
+ls ${fil} | awk 'BEGIN {FS = "[mbkLT_]"; cl='${#colist}'; sl='${#smlist}'} /corr/ && /low/  {print $4 " " $2 " " $6 " " $7 " " $9 " -1 " cl " " sl}' >> ${here}/table_run.dat
+ls ${fil} | awk 'BEGIN {FS = "[mbkLT_]"; cl='${#colist}'; sl='${#smlist}'} /corr/ && /high/  {print $4 " " $2 " " $6 " " $7 " " $9 " 1 " cl " " sl}' >> ${here}/table_run.dat
+cd ${here}
+rm -f ${datadir}/${fil}.dat
+ foreach cor ( ${colist} )
+  foreach sme ( ${smlist} )
+  awk "/ ${cor} / && /${sme}/"'{print $7}' ${datadir}/${fil} >> ${datadir}/${fil}.dat
+  end
+ end
+end

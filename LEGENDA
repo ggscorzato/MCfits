@@ -1,0 +1,69 @@
+%%%% Colums in table_Q / res have the following meaning:
+
+table_Q  res
+   1:6         L T L/H beta kappa mu
+   7:10        (r0):      r0-thin  r0-hyp
+  11:28,  1: 9 (m_pi) :  av PPss   PPls   APss APls AAss AAls AP/PPss AP/PPls  
+  29:34, 10:12 (m_rho):  av VVi_ss VVi_ls
+  35:38, 13:14 (g_pi):   PPss   PPls
+  39:46, 15:18 (f_pi_Chi):   AAss    AAls   rAPss     rAPls
+  47:54, 19:22 (m_pcac_Chi_1,2): rAP_ss  rAP_ls  dAP/PP_ss dA/PP_ls
+  55:66, 23:28 (tgO):   tgomega_ss tgomega_ls tgOVss tgOVls tgOAss tgOAls
+  67:70, 29:30 (omega): omega_ss/pi omega_ls/pi
+  71:74, 31:32 (ZA/ZV): ZAovZV_ss ZAovZV_ls 
+  75:82, 33:36 (ZV):    ZV_c_ss ZV_c_ls  ZV_ind_ss ZV_ind_ls
+  83:94, 37:42 (ZA):    ZA_mpcac_ss ZA_mpcac_ls ZA_om_c_ss ZA_om_c_ls ZA_om_ind_ss ZA_om_ind_ls    
+  95:102,43:46 (f_pi_Chi_Vcons/s): VcVcss VcVcls rVcPss rVcPls
+ 103:110,47:50 (f_pi_Chi_V/s):  VVss VVls rVPss rVPls
+
+%%%%%%%  where:
+("=" tells to how the quantity is computed. "->" tells the relation with renormalized quantities) 
+1.  L/a, T/a, high/low, beta, kappa, mu,  (fixed simulation parameters)
+2.  WL: r0/a_hyp, r0/a_thin 
+3.  m_rho = from exp decay in VVs
+
+4.  m_pi = from exp decay in PP, AP, AA0, AP/PP
+
+5.  g_pi    = <0|P|pi>      [-> g_pi_R /ZP]
+
+6.  f_pi_Chi_A   = r_AP  * g_pi /m_pi             [-> f_pi_R * cos /ZA ]
+7.  f_pi_Chi_V   = r_VP  * g_pi /m_pi             [-> f_pi_R * sin /ZV]
+
+8.  m_PCAC_Chi_1     = f_pi_Chi m_pi^2 /(2 g_pi)    [-> m^PCAC_R * cos  ZP/ZA ]
+9.  m_PCAC_Chi_mu/s  = mu/s                         [-> m^PCAC_R * ZP] 
+10. m_PCAC_Chi_2     = dAP/(2 PP)                   [-> m^PCAC_R * cos  ZP/ZA ]
+
+11.  tan(omega_V) = <V P0 > / < A P0 >
+12.  tan(omega_A) = (AVs - tan(omega_V) AAs) /  (VVs + tan(omega_V) VAs)
+13.  tan(omega) = sqrt(tan(omega_V) * tan(omega_A)) 
+
+14. ZA/ZV_om      = sqrt(tan(omega_V) / tan(omega_A)) 
+15. ZV_ind   = 2 mu / m_pi   <0| P |pi>  / <0| V |pi>  [= mu/r_VP]
+16. ZA_mpcac =  mu/ (tg(om)*m_PCAC_Chi) 
+17. ZA_om_ind   = (ZA/ZV)_om * Zv_ind
+
+%%% using conserved V:
+18. f_pi_Chi_Vcons/s   = (r_VcP *g_pi /m_pi)/sin    [-> f_pi_R]
+19. ZV_c  = < V0cons P > /< V0 P >
+20. ZA_fpi    = (f_pi_Chi_A) / (f_pi_Chi_Vcons ) * (s/c)
+21. ZA_om_c   = (ZA/ZV)_om * Zv_c
+
+%%% Ideally we should perform the fits for all combinations and or weighted averages 
+%%% of the alternatives below.
+%%% Independent choices are in different lines.
+%%% Mutually exclusive alternatives are separated by "/".
+%%% Alternatives which involve Vcons are separated by "//"
+
+ m_pi from  PP /  AP /  AA0  /   (AP/PP)
+ r0 from: thin / hyp
+ r0 from: lin. extrapolated to m_q=0 / mass-dep 
+ ZA,ZV from: 15+16 / 14+15+17 / 14+16+17 // 19+20 / 14+19+21 / 14+20+21
+ ZA,ZV from:  lin. extrapolated to m_q=0 / mass-dep 
+ g_pi from: 5
+ f_pi from: 6 / 7  // 18
+ m_pcac from: 8 / 9 / 10
+ omega from: 13
+ all: ss / ls
+
+ (when writing all in terms of m_pcac ZP disappear inside B_0)
+
